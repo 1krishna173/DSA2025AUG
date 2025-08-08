@@ -1,5 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
+//TC-O(NlogN)
+//SC_O(N)
 void merge(vector<int> &arr,int low,int mid,int high){
     vector<int> temp;
     int left=low,right=mid+1;
@@ -47,4 +49,5 @@ int main()
     cout<<it<<" ";
    }
    return 0;
+
 }
