@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define f(i,a,b) for(int i=a;i<b;i++)
+int main()
+{
+   vector<int> arr={1,2,2,4,5,7,5};
+   int largest=arr[0];
+   int slargest=-1;//assuming no- non-negative integers
+   int n=arr.size();
+   f(i,0,n){
+    if(largest<arr[i]){
+        slargest=largest;
+        largest=arr[i];
+    }
+    else if(slargest<arr[i] && largest>arr[i]){
+        slargest=arr[i];
+    }
+   }
+   cout<<slargest;
+   return 0;
+}
