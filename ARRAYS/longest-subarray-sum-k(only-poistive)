@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+int subarraysum(vector<int> arr,int k){
+    int n=arr.size();
+    int maxlen=-1;
+    int sum=0;
+    unordered_map<int,int> mpp;
+    mpp[0]=0;
+    for(int i=0;i<n;i++){
+        sum+=arr[i];
+        if(mpp.count(sum-k)){
+            maxlen=max(maxlen,i+1-mpp[sum-k]);
+        }
+        mpp[sum]=i+1;
+    }
+    return maxlen;
+}
+int main()
+{
+    //find the subarrray sum equal k return its maximum length of that subarray
+   vector<int> arr={1,2,3,1,1,1,1,1};
+   int k=3;
+    cout<<subarraysum(arr,k);
+   return 0;
+}
