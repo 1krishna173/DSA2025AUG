@@ -11,7 +11,8 @@ int subarraysum(vector<int> arr,int k){
         if(mpp.count(sum-k)){
             maxlen=max(maxlen,i+1-mpp[sum-k]);
         }
-        mpp[sum]=i+1;
+        if(!mpp.count(sum))//EDGE CASES FOR ZEROES
+            {mpp[sum]=i+1;}
     }
     return maxlen;
 }
