@@ -2,23 +2,29 @@
 This repository documents my daily Data Structures & Algorithms (DSA) journey starting August 2025.
 My goal is to master problem-solving for competitive programming and interview preparation, targeting internships in 2026.
 
-DSA2025AUG/
-│
-├── sorting/
-│   ├── bubble_sort.cpp
-│   ├── insertion_sort.cpp
-│   ├── selection_sort.cpp
-│   ├── merge_sort.cpp
-│   └── quick_sort.cpp
-│
-├── arrays/
-│   ├── max_consecutive_ones.cpp
-│   ├── missing_number.cpp
-│   ├── move_zeroes.cpp
-│   └── single_number.cpp
-|   |--
-│
-└── README.md
+
+This table tracks all solved problems and algorithms in the **ARRAYS** folder.
+
+| #  | Problem / File Name                                           | Source / Platform |
+|----|---------------------------------------------------------------|-------------------|
+| 1  | Two Sum – `leetcode-1`                                        | LeetCode          |
+| 2  | Best Time to Buy and Sell Stock – `leetcode-121`              | LeetCode          |
+| 3  | Leaders in Array – `gfg`                                      | GFG               |
+| 4  | Longest Consecutive Sequence – `leetcode-128`                 | LeetCode          |
+| 5  | Longest Subarray Sum K (Only Positive)                        | Custom / CP       |
+| 6  | Majority Element I – `leetcode-169`                           | LeetCode          |
+| 7  | Maximum Subarray – `leetcode-53`                              | LeetCode          |
+| 8  | Next Permutation – `leetcode-31`                              | LeetCode          |
+| 9  | Rearrange Array Elements by Sign – `leetcode-2149`            | LeetCode          |
+| 10 | Rotate Image – `leetcode-48`                                  | LeetCode          |
+| 11 | Set Matrix Zeroes – `leetcode-73`                             | LeetCode          |
+| 12 | Sort Colors – `leetcode-75`                                   | LeetCode          |
+| 13 | Subarray Sum K – `leetcode-560`                               | LeetCode          |
+| 14 | Bubble Sort – `bubblesort.cpp`                                | Sorting Algo      |
+| 15 | Insertion Sort – `insertionsort.cpp`                          | Sorting Algo      |
+| 16 | Max Consecutive Ones – `leetcode-485`                         | LeetCode          |
+
+
 
 ## 🛠 Resources Used
 
@@ -34,3 +40,4 @@ DSA2025AUG/
 - Prepare for internship applications in 2026.
 
 Feel free to explore the repository and follow along with my learning journey!
+
