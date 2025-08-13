@@ -16,5 +16,21 @@ DSA2025AUG/
 │   ├── missing_number.cpp
 │   ├── move_zeroes.cpp
 │   └── single_number.cpp
+|   |--
 │
 └── README.md
+
+## 🛠 Resources Used
+
+- [Striver’s A2Z DSA Sheet](https://takeuforward.org/strivers-a2z-dsa-course/)
+- [LeetCode](https://leetcode.com/)
+- [GeeksforGeeks](https://www.geeksforgeeks.org/)
+
+## 🚀 Future Goals
+
+- Complete all topics in Striver's A2Z DSA Sheet.
+- Solve at least 200 problems by December 2025.
+- Participate in competitive programming contests regularly.
+- Prepare for internship applications in 2026.
+
+Feel free to explore the repository and follow along with my learning journey!
