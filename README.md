@@ -23,7 +23,7 @@ This table tracks all solved problems and algorithms in the **ARRAYS** folder.
 | 14 | Bubble Sort – `bubblesort.cpp`                                | Sorting Algo      |
 | 15 | Insertion Sort – `insertionsort.cpp`                          | Sorting Algo      |
 | 16 | Max Consecutive Ones – `leetcode-485`                         | LeetCode          |
-
+| 17 | Spiral Matrix -'leetcode-54'                                  |LeetCode          |
 
 
 ## 🛠 Resources Used
@@ -40,4 +40,5 @@ This table tracks all solved problems and algorithms in the **ARRAYS** folder.
 - Prepare for internship applications in 2026.
 
 Feel free to explore the repository and follow along with my learning journey!
+
 
