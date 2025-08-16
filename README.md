@@ -25,8 +25,9 @@ This table tracks all solved problems and algorithms in the **ARRAYS** folder.
 | 16 | Max Consecutive Ones – `leetcode-485`                         | LeetCode          |
 | 17 | Spiral Matrix -`leetcode-54`                                  |LeetCode           |
 | 18|Pascal Traingle -`leetcode-118`                                 |LeetCode           |
-| 19|majority element -`leetcode-229`                                   |LeetCode           |
-| 18|Pascal Traingle -`gfg`                                         |GFG                 |
+| 19|majority element -`leetcode-229`                                |LeetCode           |
+| 20|Largest subarray with sum 0 -`gfg`                              |GFG                |
+|21  |3Sum -`leetcode-15`                                            |LeetCode           |
 
 ## 🛠 Resources Used
 
@@ -42,6 +43,7 @@ This table tracks all solved problems and algorithms in the **ARRAYS** folder.
 - Prepare for internship applications in 2026.
 
 Feel free to explore the repository and follow along with my learning journey!
+
 
 
 
