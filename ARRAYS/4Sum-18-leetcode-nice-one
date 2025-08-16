@@ -1,0 +1,71 @@
+Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
+
+0 <= a, b, c, d < n
+a, b, c, and d are distinct.
+nums[a] + nums[b] + nums[c] + nums[d] == target
+You may return the answer in any order.
+
+ Example 1:
+
+Input: nums = [1,0,-1,0,-2,2], target = 0
+Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+Example 2:
+
+Input: nums = [2,2,2,2,2], target = 8
+Output: [[2,2,2,2]]
+//better appraoch using hashset
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        int n=nums.size();
+        set<vector<int>> st;
+        for(int i=0;i<n-3;i++){
+            for(int j=i+1;j<n-2;j++){
+                unordered_set<int> seen;
+                for(int k=j+1;k<n;k++){
+                        int sum=nums[i]+nums[j]+nums[k];
+                        int need=target-sum;
+                        if(seen.count(need)){
+                            vector<int> temp={nums[i],nums[j],need,nums[k]};
+                            sort(temp.begin(),temp.end());
+                            st.insert(temp);
+                        }
+                        seen.insert(nums[k]);
+                    
+                }
+            }
+        }
+        vector<vector<int>> ans(st.begin(),st.end());
+        return ans;
+    }
+
+
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        for(int i=0;i<n-3;i++){
+            if(i>0 && nums[i]==nums[i-1]){continue;}
+              for(int j=i+1;j<n-2;j++){
+                    if(j>i+1 && nums[j]==nums[j-1]){continue;}
+                    int k=j+1,l=n-1;
+                     while(k<l){
+                        long long int sum=(long long)nums[i]+nums[j]+nums[k]+nums[l];
+                        if(sum>target)l--;
+                        else if(sum<target)k++;
+                        else if(sum==target){
+                            ans.push_back({nums[i],nums[j],nums[k],nums[l]});
+                            int prevk=nums[k],prevl=nums[l];
+                            while(k<n && nums[k]==prevk)k++;
+                            while(k<l && nums[l]==prevl)l--;
+                        }
+                     }
+              }
+        }
+        return ans;
+    }
+};
+//optimal appraoch
+};
