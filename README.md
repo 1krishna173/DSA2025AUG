@@ -28,6 +28,8 @@ This table tracks all solved problems and algorithms in the **ARRAYS** folder.
 | 19|majority element -`leetcode-229`                                |LeetCode           |
 | 20|Largest subarray with sum 0 -`gfg`                              |GFG                |
 |21  |3Sum -`leetcode-15`                                            |LeetCode           |
+|22  |4Sum -`leetcode-18`                                            |LeetCode           |
+| 23|number of subarray with xor k -`gfg`                            |GFG                |
 
 ## 🛠 Resources Used
 
@@ -43,6 +45,7 @@ This table tracks all solved problems and algorithms in the **ARRAYS** folder.
 - Prepare for internship applications in 2026.
 
 Feel free to explore the repository and follow along with my learning journey!
+
 
 
 
