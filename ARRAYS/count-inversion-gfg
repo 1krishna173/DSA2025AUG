@@ -1,0 +1,62 @@
+Given an array of integers arr[]. You have to find the Inversion Count of the array. 
+Note : Inversion count is the number of pairs of elements (i, j) such that i < j and arr[i] > arr[j].
+
+Examples:
+
+Input: arr[] = [2, 4, 1, 3, 5]
+Output: 3
+Explanation: The sequence 2, 4, 1, 3, 5 has three inversions (2, 1), (4, 1), (4, 3).
+Input: arr[] = [2, 3, 4, 5, 6]
+Output: 0
+Explanation: As the sequence is already sorted so there is no inversion count.
+Input: arr[] = [10, 10, 10]
+Output: 0
+Explanation: As all the elements of array are same, so there is no inversion count.
+
+class Solution {
+  public:
+   
+ int  merge(vector<int> &arr,int start,int mid,int end){
+       int count=0;
+       int i=start,j=mid+1;
+       vector<int> temp;
+       while(i<=mid && j<=end){
+           if(arr[i]>arr[j]){
+               count+=(mid-i+1);
+               temp.push_back(arr[j]);
+               j++;
+           }
+           else{
+               temp.push_back(arr[i]);
+               i++;
+           }
+       }
+       while(i<=mid){
+           temp.push_back(arr[i]);
+               i++;
+       }
+       while(j<=end){
+            temp.push_back(arr[j]);
+               j++;
+       }
+       for(int i=0;i<temp.size();i++){
+           arr[i+start]=temp[i];
+       }
+       return count;
+   }
+ int  mergesort(vector<int> &arr,int start,int end){
+      int cnt=0;
+      if(start<end){
+          int mid=start+(end-start)/2;
+          cnt+=mergesort(arr,start,mid);
+          cnt+=mergesort(arr,mid+1,end);
+          cnt+=merge(arr,start,mid,end);
+          return cnt;
+      }
+  }
+    int inversionCount(vector<int> &arr) {
+        // Code Here
+        return mergesort(arr,0,arr.size()-1);
+       
+    }
+};
