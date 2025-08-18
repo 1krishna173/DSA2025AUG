@@ -51,8 +51,9 @@ class Solution {
           cnt+=mergesort(arr,start,mid);
           cnt+=mergesort(arr,mid+1,end);
           cnt+=merge(arr,start,mid,end);
-          return cnt;
+         
       }
+ return cnt;
   }
     int inversionCount(vector<int> &arr) {
         // Code Here
