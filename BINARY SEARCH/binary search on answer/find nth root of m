@@ -1,0 +1,29 @@
+You are given 2 numbers n and m, the task is to find n√m (nth root of m). If the root is not integer then returns -1.
+
+Examples :
+
+Input: n = 3, m = 27
+Output: 3
+Explanation: 33 = 27
+Input: n = 3, m = 9
+Output: -1
+Explanation: 3rd root of 9 is not integer.
+Input: n = 4, m = 625
+Output: 5
+Explanation: 54 = 625
+
+class Solution {
+  public:
+    int nthRoot(int n, int m) {
+        // Code here
+        long long int start=1,end=m;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            long long int cal=pow(mid,n);
+            if(cal==m)return mid;
+            else if(cal>m) end=mid-1;
+            else start=mid+1;
+        }
+        return -1;
+    }
+};
