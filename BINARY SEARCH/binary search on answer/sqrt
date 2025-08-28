@@ -1,0 +1,23 @@
+find the sqrt of a number using binary search if number is not a sqrt then return its floor value
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+   int n;
+   cin>>n;
+   int start=1,end=n;
+   int ans=1;
+   while(start<=end){
+      int mid=start+(end-start)/2;
+      if(mid*mid>n){
+         end=mid-1;
+      }
+      else{
+         ans=mid;
+         start=mid+1;
+      }
+   }
+   cout<<ans;
+   return 0;
+}
