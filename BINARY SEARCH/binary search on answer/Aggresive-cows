@@ -8,6 +8,7 @@ Explanation: The first cow can be placed at stalls[0],
 the second cow can be placed at stalls[2] and 
 the third cow can be placed at stalls[3]. 
 The minimum distance between cows in this case is 3, which is the largest among all possible ways.
+
 Input: stalls[] = [10, 1, 2, 7, 5], k = 3
 Output: 4
 Explanation: The first cow can be placed at stalls[0],
