@@ -1,0 +1,36 @@
+Easy
+Topics
+premium lock icon
+Companies
+Given two strings s and goal, return true if and only if s can become goal after some number of shifts on s.
+
+A shift on s consists of moving the leftmost character of s to the rightmost position.
+
+For example, if s = "abcde", then it will be "bcdea" after one shift.
+
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+        for(int i=0;i<goal.size()+1;i++){
+            char c=goal[goal.size()-1];
+            for(int i=goal.size()-1;i>0;i--){
+                goal[i]=goal[i-1];
+            }
+            goal[0]=c;
+            if(goal==s)return true;
+        }
+        return false;
+    }
+};
+
+
+//CLASSICAL APPROACH
+
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+        if(goal.size()!=s.size())return false;
+        string concat=s+s;
+        return concat.find(goal)!=string::npos;
+    }
+};
