@@ -1,0 +1,13 @@
+//Print from 1 to n
+Base induction-hypothesis
+#include <iostream>
+using namespace std;
+void Print(int n){
+    if(n==1){cout<<1<<" "; return;}
+    Print(n-1);
+    cout<<n<<" ";
+}
+int main() {
+    Print(7);
+    return 0;
+}
