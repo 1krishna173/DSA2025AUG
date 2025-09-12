@@ -1,0 +1,7 @@
+n&n-1
+This is my ans
+based on observation
+n=40 binary:101000
+n=39 binary:100111
+if we & both of these we get:
+100000 this is what it is required
