@@ -1,0 +1,15 @@
+Given a non-negative number n . The problem is to set the rightmost unset bit in the binary representation of n.
+
+Examples :
+
+Input: n = 6
+Output: 7
+Explanation: The binary representation of 6 is 110. After setting right most bit it becomes 111 which is 7.
+
+class Solution {
+  public:
+    int setBit(int n) {
+        // Write Your Code here
+        return n|(n+1);
+    }
+};//most optimal approach otherwise go and find first most then just add that pow(2,till poistion) to the number
