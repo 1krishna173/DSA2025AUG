@@ -1,0 +1,8 @@
+#include<stdio.h>
+using namespace std;
+int main(){
+  if(n&1==0){
+  cout<<"Even";
+  }
+  else cout<<"Odd";
+}
