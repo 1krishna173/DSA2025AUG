@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+#this problem tends to be an fibonaaci series
+#problem statement 
+need to reach nstairs find possible combinations . we can choose to go 1 or 2 stairs at a once
+
+int staircase(int n){
+  if(n==0 || n==1)return n;
+  return staircase(n-1)+staircase(n-2);
+
+}
+int main (){
+cout<<staircase(5);
+   
+   return 0;
+}
