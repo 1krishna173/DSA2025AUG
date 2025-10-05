@@ -1,0 +1,29 @@
+// sum of odd numbers between 
+#include<bits/stdc++.h>
+#define ll long long
+#define vi vector<int>
+#define vll vector<ll>
+#define pb push_back
+#define ft first
+#define sd second
+#define all(x) (x).begin(), (x).end()
+#define f(i,a,b) for(ll i=a;i<b;i++)
+#define tc() ll t; cin>>t; while(t--)
+#define endl '\n'
+using namespace std;
+int sumodd(int a,int b,int sum){
+    if(a>b){return sum;}
+    if(b%2!=0){
+        sumodd(a,b-2,sum+b);
+    }
+    else{
+        sumodd(a,b-1,sum);
+    }
+}
+int main (){
+ios::sync_with_stdio(false);
+cin.tie(0);
+    cout<<sumodd(1,7,0)<<endl;
+    
+    return 0;
+}
