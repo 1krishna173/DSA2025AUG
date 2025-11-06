@@ -1,0 +1,24 @@
+#define ll long long int
+class Solution {
+public:
+    long long countSubarrays(vector<int>& nums, long long k) {
+        ll n=nums.size();
+        int i=0,j=0;
+        ll sum=0,cnt=0;
+        while(j<n){
+                sum+=nums[j];
+            while(1LL*(j-i+1)*sum>=k && i<=j){
+                cnt+=(j-i);
+                sum=sum-nums[i];
+                i++;
+            }
+            j++;
+        }
+        while(i<n){
+            cnt+=(j-i);
+           sum=sum-nums[i];
+            i++;
+        }
+        return cnt;
+    }
+};
