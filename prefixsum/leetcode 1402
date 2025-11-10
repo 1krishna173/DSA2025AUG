@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int maxSatisfaction(vector<int>& s) {
+        sort(s.begin(),s.end());
+        int n=s.size();
+        int maxe=s[n-1];
+        int sum=s[n-1],ans=s[n-1];
+        for(int i=n-2;i>=0;i--){
+            ans=ans+sum+s[i];
+            maxe=max(maxe,ans);
+            sum+=s[i];
+        }
+         maxe=max(maxe,ans);
+        return ((maxe<0)? 0: maxe);
+    }
+};
