@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<int> answerQueries(vector<int>& nums, vector<int>& q) {
+        int n=nums.size(),m=q.size();
+        sort(nums.begin(),nums.end());
+        for(int i=1;i<n;i++){
+            nums[i]+=nums[i-1];
+        }
+        int j=0;
+        vector<int> ans(m,0);
+        for(int i=0;i<m;i++){
+            int start=0,end=n-1;
+            int len=0;
+            bool check=false;
+            while(start<=end){
+                int mid=start+(end-start)/2;
+                if(nums[mid]==q[i]){check=true;len=mid+1;break;}
+                else if(nums[mid]<q[i]){
+                    start=mid+1;
+                }
+                else{
+                    len=mid;
+                    end=mid-1;
+                }
+            }
+            if(check){ans[i]=len; continue;}
+            ans[i]=start;
+        }
+        return ans;
+    }
+}; 
