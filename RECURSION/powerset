@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+void powerset(vector<vector<int>> &ans,vector<int> arr,vector<int> temp,int i){
+    if(i==arr.size()){ans.push_back(temp); return;}
+    // include nhi karna he 
+     powerset(ans,arr,temp,i+1);
+    //include karna he 
+    temp.push_back(arr[i]);
+    
+     powerset(ans,arr,temp,i+1);
+    
+}
+int main() {
+	// your code goes here
+    vector<int> arr={1,2,3};
+    vector<int> temp;
+    vector<vector<int>> ans;
+    powerset(ans,arr,temp,0);
+    for(int i=0;i<ans.size();i++){
+        for(int j=0;j<ans[i].size();j++){
+            cout<<ans[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+}
