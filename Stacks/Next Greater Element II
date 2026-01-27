@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<int> nextgreater(vector<int> &arr){
+     vector<int> ans(arr.size(),0);
+     stack<int> st;
+    for(int i=2*arr.size()-1;i>=0;i--){
+        int j=i%arr.size();
+         while(!st.empty() and st.top()<=arr[j]){
+             st.pop();
+         }
+         if(i<=arr.size()-1){
+            if(st.empty()) ans[i]=-1;
+            else ans[i]=st.top();
+         }
+        
+         st.push(arr[j]);
+     }
+     return ans;
+}
+int main() {
+	// your code goes here
+    vector<int> arr={2,10,12,1,11};
+    vector<int> result=nextgreater(arr);
+    for(auto it : result){
+        cout<<it<<" ";
+    }
+}
+
