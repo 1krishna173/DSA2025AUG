@@ -1,0 +1,49 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n=height.size();
+        vector<int> suffixmax(n,0);
+        suffixmax[n-1]=height[n-1];
+        for(int i=n-2;i>0;i--){
+            suffixmax[i]=max(height[i],suffixmax[i+1]);
+        }
+        int total=0;
+        int prefixmax=INT_MIN;
+        for(int i=0;i<n;i++){
+             prefixmax=max(prefixmax,height[i]);
+            if(height[i]<suffixmax[i] and height[i]<prefixmax){
+                total+=(min(suffixmax[i],prefixmax)-height[i]);
+            }
+        }
+        return total;
+    }
+};
+
+
+
+optimal solution using the two pointer
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n=height.size();
+        int total=0,lmax=0,rmax=0,l=0,r=n-1;
+        while(l<r){
+            if(height[l]<height[r]){
+                if(lmax>height[l]){
+                    total+=lmax-height[l];
+                }
+                else lmax=max(lmax,height[l]);
+                l++;
+            }else{
+                if(rmax>height[r]){
+                    total+=rmax-height[r];
+                }
+                else rmax=max(rmax,height[r]);
+                r--;
+            }
+
+        }
+
+        return total;
+    }
+};
