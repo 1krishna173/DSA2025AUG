@@ -1,0 +1,101 @@
+class Solution {
+  public:
+  int f(int ind,int w,vector<int>& val, vector<int>& wt,vector<vector<int>> &dp){
+      if(ind==0){
+         return (w/wt[0])*val[0];
+      }
+      if(dp[ind][w]!=-1)return dp[ind][w];
+      int not_take=f(ind-1,w,val,wt,dp);
+      int take=INT_MIN;
+      if(wt[ind]<=w){
+          take=val[ind]+f(ind,w-wt[ind],val,wt,dp);
+      }
+      return dp[ind][w]=max(take,not_take);
+  }
+    int knapSack(vector<int>& val, vector<int>& wt, int capacity) {
+        // code here
+        int n=val.size();
+        vector<vector<int>> dp(n,vector<int> (capacity+1,-1));
+        return f(n-1,capacity,val,wt,dp);
+    }
+};
+
+
+//tabulation
+
+class Solution {
+  public:
+    int knapSack(vector<int>& val, vector<int>& wt, int capacity) {
+        // code here
+        int n=val.size();
+        vector<vector<int>> dp(n,vector<int> (capacity+1,0));
+        for(int i=0;i<=capacity;i++){
+            dp[0][i]=(i/wt[0])*val[0];
+        }
+        for(int ind=1;ind<n;ind++){
+            for(int w=0;w<=capacity;w++){
+                int not_take=dp[ind-1][w];
+                int take=INT_MIN;
+                if(wt[ind]<=w){
+                    take=val[ind]+dp[ind][w-wt[ind]];
+                }
+                dp[ind][w]=max(take,not_take);
+            }
+        }
+        return dp[n-1][capacity];
+    }
+};
+
+//2n space optimization
+class Solution {
+  public:
+    int knapSack(vector<int>& val, vector<int>& wt, int capacity) {
+        // code here
+        int n=val.size();
+        vector<int> prev(capacity+1,0);
+        for(int i=0;i<=capacity;i++){
+            prev[i]=(i/wt[0])*val[0];
+        }
+        for(int ind=1;ind<n;ind++){
+            vector<int> curr(capacity+1,0);
+            for(int w=0;w<=capacity;w++){
+                int not_take=prev[w];
+                int take=INT_MIN;
+                if(wt[ind]<=w){
+                    take=val[ind]+curr[w-wt[ind]];
+                }
+                curr[w]=max(take,not_take);
+            }
+            prev=curr;
+        }
+        return prev[capacity];
+    }
+};
+
+
+// capacity space optimisation of space (maximum optimised)
+class Solution {
+  public:
+    int knapSack(vector<int>& val, vector<int>& wt, int capacity) {
+        // code here
+        int n=val.size();
+        // vector<vector<int>> dp(n,vector<int> (capacity+1,0));
+        vector<int> prev(capacity+1,0);
+        for(int i=0;i<=capacity;i++){
+            prev[i]=(i/wt[0])*val[0];
+        }
+        for(int ind=1;ind<n;ind++){
+            // vector<int> curr(capacity+1,0);
+            for(int w=0;w<=capacity;w++){
+                int not_take=prev[w];
+                int take=INT_MIN;
+                if(wt[ind]<=w){
+                    take=val[ind]+prev[w-wt[ind]];
+                }
+                prev[w]=max(take,not_take);
+            }
+            // prev=curr;
+        }
+        return prev[capacity];
+    }
+};
