@@ -1,0 +1,84 @@
+class Solution {
+public:
+    int f(int ind, int buy, int limit, vector<int>& prices,
+          vector<vector<vector<int>>>& dp) {
+        if (limit == 2 or ind == prices.size())
+            return 0;
+        if(dp[ind][buy][limit]!=-1)return dp[ind][buy][limit];
+        long long int profit = 0;
+        if (buy == 1) {
+            profit = max(-prices[ind] + f(ind + 1, 0, limit, prices,dp),
+                         0 + f(ind + 1, 1, limit, prices,dp));
+        } else {
+            profit = max(prices[ind] + f(ind + 1, 1, limit + 1, prices,dp),
+                         0 + f(ind + 1, 0, limit, prices,dp));
+        }
+        return dp[ind][buy][limit]=profit;
+    }
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        vector<vector<vector<int>>> dp(n,vector<vector<int>>(2, vector<int>(3, -1)));
+        return f(0, 1, 0, prices, dp);
+    }
+};
+
+
+
+class Solution {
+public:
+    int f(int ind, int buy, int limit, vector<int>& prices,
+          vector<vector<vector<int>>>& dp) {
+        if (limit == 2 or ind == prices.size())
+            return 0;
+        if (dp[ind][buy][limit] != -1)
+            return dp[ind][buy][limit];
+        long long int profit = 0;
+        if (buy == 1) {
+            profit = max(-prices[ind] + f(ind + 1, 0, limit, prices, dp),
+                         0 + f(ind + 1, 1, limit, prices, dp));
+        } else {
+            profit = max(prices[ind] + f(ind + 1, 1, limit + 1, prices, dp),
+                         0 + f(ind + 1, 0, limit, prices, dp));
+        }
+        return dp[ind][buy][limit] = profit;
+    }
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        vector<vector<vector<int>>> dp(
+            n + 1, vector<vector<int>>(2, vector<int>(3, 0)));
+        for (int ind = n - 1; ind >= 0; ind--) {
+            for (int buy = 0; buy <= 1; buy++) {
+                for (int limit = 1; limit >= 0; limit--) {
+                    long long int profit = 0;
+                    if (buy == 1) {
+                        profit =
+                            max(-prices[ind] + dp[ind+1][0][limit],
+                                0 + dp[ind+1][1][limit]);
+                    } else {
+                        profit = max(prices[ind] + dp[ind+1][1][limit+1],
+                                     0 +dp[ind+1][0][limit]);
+                    }
+                    dp[ind][buy][limit] = profit;
+                }
+            }
+        }
+        return dp[0][1][0];
+        // return f(0, 1, 0, prices, dp);
+    }
+};
+
+//we can aslo solve ot in n*4 size of dp since B S B S
+we see that buying is even and selling is odd 
+so we remove the case for the buying 
+//This is the kind of ppusedo code i hope i can write it 
+f(ind, t){
+  if(ind==n || t==4)return 0;
+  p=0;
+  if(p%2==0){
+    p=max(-arr[ind]+f(ind+1,t+1),0+f(ind+1,t));
+  }
+else{
+  p=max(arr[ind]+f(ind+1,t+1),0+f(ind+1,t));
+}
+  return p;
+}
