@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> dp(n,1);
+        for(int ind=1;ind<n;ind++){
+            for(int prev=ind-1;prev>=0;prev--){
+                if(nums[prev]<nums[ind]){
+                    dp[ind]=max(dp[ind],dp[prev]+1);
+                }
+            }
+        }
+        int m=*max_element(dp.begin(),dp.end());
+        return m;
+    }
+}; 
+
+
+This is the craziest approach you will see
