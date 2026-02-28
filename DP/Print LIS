@@ -1,0 +1,41 @@
+class Solution {
+public:
+    vector<int> getLIS(vector<int>& arr) {
+        int n = arr.size();
+        if(n == 0) return {};
+
+        vector<int> dp(n, 1), hash(n);
+
+        // Proper initialization
+        for(int i = 0; i < n; i++)
+            hash[i] = i;
+
+        for(int ind = 1; ind < n; ind++){
+            for(int prev = 0; prev < ind; prev++){
+                if(arr[prev] < arr[ind] && dp[ind] < 1 + dp[prev]){
+                    dp[ind] = 1 + dp[prev];
+                    hash[ind] = prev;
+                }
+            }
+        }
+
+        int maxi = dp[0], lastIndex = 0;
+        for(int i = 1; i < n; i++){
+            if(dp[i] > maxi){
+                maxi = dp[i];
+                lastIndex = i;
+            }
+        }
+
+        vector<int> temp;
+        temp.push_back(arr[lastIndex]);
+
+        while(hash[lastIndex] != lastIndex){
+            lastIndex = hash[lastIndex];
+            temp.push_back(arr[lastIndex]);
+        }
+
+        reverse(temp.begin(), temp.end());
+        return temp;
+    }
+};
