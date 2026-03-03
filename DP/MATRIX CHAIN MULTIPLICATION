@@ -1,0 +1,29 @@
+class Solution {
+  public:
+    int f(int i,int j,vector<int> &arr,vector<vector<int>> &dp){
+        if(i==j)return 0;
+        int mine=INT_MAX;
+        if(dp[i][j]!=-1)return dp[i][j];
+        for(int k=i;k<j;k++){
+            int steps=arr[i-1]*arr[k]*arr[j]+f(i,k,arr,dp)+f(k+1,j,arr,dp);
+            mine=min(mine,steps);
+        }
+        return dp[i][j]= mine;
+    }
+    int matrixMultiplication(vector<int> &arr) {
+        // code here
+        int n=arr.size();
+        vector<vector<int>> dp(n,vector<int> (n,0));
+        for(int i=n-1;i>=1;i--){
+            for(int j=i+1;j<n;j++){
+                int mine=INT_MAX;
+                for(int k=i;k<j;k++){
+                    int steps=arr[i-1]*arr[k]*arr[j]+dp[i][k]+dp[k+1][j];
+                    mine=min(mine,steps);
+                }
+                 dp[i][j]= mine;
+            }
+        }
+        return dp[1][n-1];
+    }
+};
