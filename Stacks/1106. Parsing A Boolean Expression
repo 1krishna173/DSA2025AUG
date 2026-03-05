@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool parseBoolExpr(string expression) {
+        stack<char> st;
+        for(char c: expression){
+            if(c==',' || c=='(')continue;
+            if(c=='|' || c=='&' || c=='t' || c=='f' || c=='!'){
+                st.push(c);
+            }
+            else if(c==')'){
+                bool hastrue=false,hasfalse=false;
+
+                while(st.top()!='!' and st.top()!='&' and st.top()!='|'){
+                    if(st.top()=='f')hasfalse=true;
+                    if(st.top()=='t')hastrue=true;
+                    st.pop();
+                }
+                char op=st.top();
+                st.pop();
+                if(op=='&'){
+                    if(hasfalse) st.push('f');
+                    else st.push('t');
+
+                }
+                else if(op=='|'){
+                    if(hastrue) st.push('t');
+                    else st.push('f');
+                }
+                else if(op=='!'){
+                    if(hastrue)st.push('f');
+                    else st.push('t');
+                }
+                
+            }
+        }
+        return st.top()=='t';
+    }
+};
