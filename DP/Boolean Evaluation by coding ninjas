@@ -1,0 +1,48 @@
+long long int mod=1000000007;
+int f(int i,int j,bool isTrue,string &a,vector<vector<vector<int>>> &dp){
+    if(i>j)return 0;
+    if(i==j){
+        if(isTrue)return a[i]=='T';
+        else return a[i]=='F';
+    }
+    if(dp[i][j][isTrue]!=-1)return dp[i][j][isTrue];
+    long long int ways=0;
+    for(int ind=i+1;ind<=j-1;ind+=2){
+        int lt=f(i,ind-1,1,a,dp);
+        int lf=f(i,ind-1,0,a,dp);
+        int rt=f(ind+1,j,1,a,dp);
+        int rf=f(ind+1,j,0,a,dp);
+        if(a[ind]=='&'){
+            if(isTrue){
+                ways=(ways+(1LL*lt*rt)%mod)%mod;
+            }
+            else{
+                ways=(ways+(1LL*rf*lf)%mod+(1LL*lf*rt)%mod+(1LL*rf*lt)%mod)%mod;
+            }
+        }
+        else if(a[ind]=='|'){
+            if(isTrue){
+                ways=(ways+(1LL*lt*rt)%mod+(1LL*lf*rt)%mod+(1LL*rf*lt)%mod)%mod;
+            }
+            else{
+                ways=(ways+(1LL*lf*rf)%mod)%mod;
+            }
+        }
+        else{
+            if(isTrue){
+                ways=(ways+(1LL*lf*rt)%mod+(1LL*rf*lt)%mod)%mod;
+            }
+            else{
+                ways=(ways+(1LL*rt*lt)%mod+(1LL*rf*lf)%mod)%mod;
+            }
+        }
+        
+    }
+    return dp[i][j][isTrue]=ways%mod;
+}
+int evaluateExp(string & exp) {
+    // Write your code here.
+    int n=exp.size();
+    vector<vector<vector<int>>> dp(n,vector<vector<int>> (n,vector<int> (2,-1)));
+    return f(0,exp.size()-1,1,exp,dp);
+}
