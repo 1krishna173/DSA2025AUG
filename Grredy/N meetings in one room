@@ -1,0 +1,33 @@
+
+class Data{
+        public:
+        int start,end,index;
+};
+class Solution {
+  public:
+    // Function to find the maximum number of meetings that can
+    // be performed in a meeting room
+    
+    static bool comp(Data a,Data b){
+        return a.end<b.end;
+    }
+    int maxMeetings(vector<int>& start, vector<int>& end) {
+        // Your code here
+        int n=start.size();
+        vector<Data> arr(n);
+        for(int i=0;i<n;i++){
+            arr[i].start=start[i];
+            arr[i].end=end[i];
+            arr[i].index=i+1;
+        }
+        sort(arr.begin(),arr.end(),comp);
+        int cnt=1,last=arr[0].end;
+        for(int i=1;i<n;i++){
+            if(arr[i].start>last){
+                cnt++;
+                last=arr[i].end;
+            }
+        }
+        return cnt;
+    }
+};
