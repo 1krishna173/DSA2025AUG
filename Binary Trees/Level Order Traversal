@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+using namespace std;
+class node{
+    public: 
+    int data;
+    node* left;
+    node* right;
+    node(int data){
+        this->data=data;
+    }
+};
+
+static int idx=-1;
+node* build(vector<int> nodes){
+    idx++;
+    if(nodes[idx]==-1){
+        return NULL;
+    }
+    node* currnode=new node(nodes[idx]);  
+    currnode->left=build(nodes);
+    currnode->right=build(nodes);
+    return currnode;
+}
+
+void levelordertraversal(node* root){
+    if(root==NULL)return;
+    queue<node*> q;
+    q.push(root);
+    q.push(NULL);
+    while(!q.empty()){
+        node* currNode=q.front();
+        q.pop();
+        if(currNode==NULL){
+            if(q.empty()){break;}
+            cout<<"\n";
+            q.push(NULL);
+            continue;
+        }
+        cout<<currNode->data<<" ";
+        if(currNode->left!=NULL){
+            q.push(currNode->left);
+        }
+        if(currNode->right!=NULL){
+            q.push(currNode->right);
+        }
+    }
+}
+int main() {
+	vector<int> nodes={1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
+    node *root=build(nodes);
+    levelordertraversal(root);
+}
