@@ -1,0 +1,47 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool path(TreeNode* root,int n,vector<TreeNode* > &arr){
+        if(root==NULL){return false;}
+        arr.push_back(root);
+        if(root->val==n){return true;}
+        bool l=path(root->left,n,arr);
+        bool r=path(root->right,n,arr);
+        if(l==true || r==true){
+            return true;
+        }
+        else{arr.pop_back();
+            return false;
+        }
+    }
+    TreeNode* findpath(TreeNode* root,int n1,int n2){
+        vector<TreeNode*> path1,path2;
+        path(root,n1,path1);
+        path(root,n2,path2);
+        TreeNode* temp=root;
+        for(int i=0;i<min(path1.size(),path2.size());i++){
+            if(path1[i]!=path2[i]){return temp;}
+            else temp=path1[i];
+        }
+        return temp;
+    }
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        // return findpath(root,p->val,q->val);
+        if(root==NULL)return NULL;
+        if(root->val==p->val || root->val==q->val){return root;}
+        TreeNode* leftLca=lowestCommonAncestor(root->left,p,q);
+        TreeNode* rightLca=lowestCommonAncestor(root->right,p,q);
+        if(leftLca!=NULL && rightLca!=NULL){
+            return root;
+        }
+        return leftLca==NULL ? rightLca : leftLca;
+    }
+};
