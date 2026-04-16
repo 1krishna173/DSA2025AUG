@@ -1,0 +1,29 @@
+/* A binary tree node
+struct Node
+{
+    int data;
+    Node* left, * right;
+}; */
+
+class Solution {
+  public:
+
+    // Convert a given tree to a tree where every node contains sum of values of
+    // nodes in left and right subtrees in the original tree
+    int transform(Node *root) {
+    if (root == NULL) return 0;
+    
+    int l = transform(root->left);
+    int r = transform(root->right);
+    
+    int old = root->data;
+    root->data = l + r;  // new value = sum of LEFT subtree + RIGHT subtree originals
+    
+    return old + l + r;  // return sum of ALL original values in this subtree
+}
+    
+    void toSumTree(Node *node) {
+        // Your code here
+        transform(node);
+    }
+};
