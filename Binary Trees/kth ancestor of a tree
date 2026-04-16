@@ -1,0 +1,30 @@
+/*
+Structure of the node of the binary tree is as
+struct Node
+{
+    int data;
+    struct Node *left, *right;
+};
+*/
+// your task is to complete this function
+class Solution {
+  public:
+  bool findpath(Node* root,vector<int> &path,int node){
+      if(root==NULL)return false;
+      path.push_back(root->data);
+      if(root->data==node){return true;}
+      bool a=findpath(root->left,path,node);
+     bool b= findpath(root->right,path,node);
+     if(a || b)return true;
+      path.pop_back();
+      return false;
+      
+  }
+    int kthAncestor(Node *root, int k, int node) {
+        // Code here
+        vector<int> path;
+        findpath(root,path,node);
+        if(k+1>path.size())return -1;
+        return path[path.size()-k-1];
+    }
+};
