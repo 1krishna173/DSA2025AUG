@@ -1,0 +1,61 @@
+/*
+class Node {
+  public:
+    int data;
+    Node* left;
+    Node* right;
+
+    // Constructor to initialize a new node
+    Node(int val) {
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:
+    bool isleaf(Node *root){
+        return root->left==NULL && root->right==NULL;
+    }
+    void collectleft(Node *root,vector<int> &ans){
+        if(root==NULL || isleaf(root))return ;
+        ans.push_back(root->data);
+        if(root->left!=NULL){
+            collectleft(root->left,ans);
+        }
+        else if(root->right!=NULL){
+            collectleft(root->right,ans);
+        }
+    }
+    void collect_leaf(Node *root,vector<int> &ans){
+        if(root==NULL)return ;
+        if(isleaf(root)){ans.push_back(root->data);}
+        collect_leaf(root->left,ans);
+        collect_leaf(root->right,ans);
+        
+    }
+    void collectright(Node *root,vector<int> &ans){
+        if(root==NULL || isleaf(root))return ;
+        
+        if(root->right!=NULL){
+            collectright(root->right,ans);
+        }
+        else if(root->left!=NULL){
+            collectright(root->left,ans);
+        }
+        ans.push_back(root->data);
+    }
+    vector<int> boundaryTraversal(Node *root) {
+        // code here
+        vector<int> ans;
+        if(root==NULL)return ans;
+        if(!isleaf(root))ans.push_back(root->data);
+        collectleft(root->left,ans);
+        collect_leaf(root,ans);
+        collectright(root->right,ans);
+        return ans;
+        
+    }
+};
