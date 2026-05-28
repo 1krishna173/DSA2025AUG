@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define f(i,a,b) for(int i=a;i<b;i++)
+#define tc() int t; cin>>t; while(t--)
+#define vi vector<int>
+class Node{
+    public: 
+    int data;
+    Node* left;
+    Node* right;
+    Node(int val){
+        data=val;
+        left=right=NULL;
+    }
+};
+Node* insertnode(Node *root,int val){
+    if(root==NULL){
+        return new Node(val);
+    }
+    if(root->data<val){//right subtree
+        root->right=insertnode(root->right,val);
+    }
+    else{
+        root->left=insertnode(root->left,val);
+    }
+}
+Node* buildBST(vi &arr){
+    Node* root=NULL;
+    for(int i=0;i<arr.size();i++){
+        root=insertnode(root,arr[i]);
+    }
+    return root;
+}
+void inorder(Node *root){
+    if(root==NULL)return ;
+    inorder(root->left);
+    cout<<root->data<<" ";
+    inorder(root->right);
+}
+bool search(Node *root,int val){// O(Height)-avg  // Worst case -O(N) for skewed tree where height=n
+    if(root==NULL)return false;
+    if(root->data==val)return true;
+    if(root->data>val){//left subtree
+        return  search(root->left,val);
+    }
+    else{
+        return search(root->right,val);
+    }
+}
+int main() {
+    vi arr={5,1,3,4,2,7};
+    Node* root=NULL;
+    root=buildBST(arr);
+    // inorder(root);
+    cout<<search(root,4);
+}
