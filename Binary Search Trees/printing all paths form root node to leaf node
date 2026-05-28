@@ -1,0 +1,35 @@
+/*
+Definition for Node
+class Node {
+  public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int val) {
+        data = val;
+        left = right = nullptr;
+    }
+};
+*/
+
+class Solution {
+  public:
+  bool allpaths(vector<vector<int>> &marr,vector<int> &arr,Node *root){
+      if(root==NULL){return false;}
+      arr.push_back(root->data);
+      bool a=allpaths(marr,arr,root->left);
+      bool b=allpaths(marr,arr,root->right);
+      if(a==false and b==false){
+          marr.push_back(arr);
+      }
+      arr.pop_back();
+  }
+    vector<vector<int>> Paths(Node* root) {
+        // code here
+        vector<vector<int>> marr;
+        vector<int> arr;
+        allpaths(marr,arr,root);
+        return marr;
+    }
+};
