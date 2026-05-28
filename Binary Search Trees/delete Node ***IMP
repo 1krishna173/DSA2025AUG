@@ -49,7 +49,7 @@ bool search(Node *root,int val){// O(Height)-avg  // Worst case -O(N) for skewed
         return search(root->right,val);
     }
 }
-Node* getinordersuccessor(Node *root){
+Node* getinordersuccessor(Node *root){//it is the left most node of the 0right node
     while(root->left!=NULL){
         root=root->left;
     }
