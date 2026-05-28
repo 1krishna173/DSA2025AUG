@@ -1,0 +1,27 @@
+// Given values in range [x,y] print the values we will get in this one ;
+class Solution {
+  public:
+    void pNodes(vector<int> &arr,Node* root,int low,int high){
+        if(root==NULL)return ;
+        if(root->data<=high and low<=root->data){
+            arr.push_back(root->data);
+             pNodes(arr,root->left,low,high);
+             pNodes(arr,root->right,low,high);
+        }
+        else if(root->data<low){
+             pNodes(arr,root->right,low,high);
+        }
+        else if(root->data>high){
+              pNodes(arr,root->left,low,high);
+        }
+        
+    }
+    vector<int> printNearNodes(Node *root, int low, int high) {
+        // code here
+        vector<int> arr;
+         pNodes(arr,root,low,high);
+         sort(arr.begin(),arr.end());
+        return arr;
+       
+    }
+};
