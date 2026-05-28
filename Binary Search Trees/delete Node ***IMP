@@ -1,0 +1,93 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define f(i,a,b) for(int i=a;i<b;i++)
+#define tc() int t; cin>>t; while(t--)
+#define vi vector<int>
+class Node{
+    public: 
+    int data;
+    Node* left;
+    Node* right;
+    Node(int val){
+        data=val;
+        left=right=NULL;
+    }
+};
+Node* insertnode(Node *root,int val){
+    if(root==NULL){
+        return new Node(val);
+    }
+    if(root->data<val){//right subtree
+        root->right=insertnode(root->right,val);
+    }
+    else{
+        root->left=insertnode(root->left,val);
+    }
+    return root;
+}
+Node* buildBST(vi &arr){
+    Node* root=NULL;
+    for(int i=0;i<arr.size();i++){
+        root=insertnode(root,arr[i]);
+    }
+    return root;
+}
+void inorder(Node *root){
+    if(root==NULL)return ;
+    inorder(root->left);
+    cout<<root->data<<" ";
+    inorder(root->right);
+}
+bool search(Node *root,int val){// O(Height)-avg  // Worst case -O(N) for skewed tree where height=n
+    if(root==NULL)return false;
+    if(root->data==val)return true;
+    if(root->data>val){//left subtree
+        return  search(root->left,val);
+    }
+    else{
+        return search(root->right,val);
+    }
+}
+Node* getinordersuccessor(Node *root){
+    while(root->left!=NULL){
+        root=root->left;
+    }
+    return root;
+}
+Node *delNode(Node* root,int val){
+    if(root==NULL)return NULL;
+    if(root->data<val){
+        root->right=delNode(root->right,val);
+    }
+    else if(root->data>val){
+        root->left=delNode(root->left,val);
+    }
+    else{
+        // case 1: 0 childs
+        if(root->left==NULL && root->right==NULL){
+            delete root;
+            return NULL;
+        }
+        //case 2:  1child
+        if(root->left==NULL || root->right==NULL){
+            return root->left==NULL ? root->right : root->left;
+        }
+        //case 3:  2 child
+        Node* IS=getinordersuccessor(root->right);
+        root->data=IS->data;
+        root->right=delNode(root->right,IS->data);
+        return root;
+    }
+}
+int main() {
+    vi arr={5,1,3,4,2,7};
+    Node* root=NULL;
+    root=buildBST(arr);
+    inorder(root);
+    cout<<endl;
+    root=delNode(root,3);
+    inorder(root);
+    // cout<<search(root,4);
+
+}
