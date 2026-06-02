@@ -1,0 +1,49 @@
+/* Tree node structure  used in the program
+
+
+};*/
+
+class Solution {
+  public:
+    /*You are required to complete this method */
+    // Return the size of the largest sub-tree which is also a BST
+   int ans;
+    class info{
+        public:
+        bool isBST;
+        int max;
+        int min;
+        int size;
+        info(bool BST,int ma,int mi,int sz){
+            this->isBST=BST;
+            this->max=ma;
+            this->min=mi;
+            this->size=sz;
+        }
+        
+    };
+    info* helpher(Node *root){
+        if(root==NULL){
+            return new info(true,INT_MIN,INT_MAX,0);
+        }
+        info* leftInfo=helpher(root->left);
+        info* rightInfo=helpher(root->right);
+        int currmin=min(root->data,min(leftInfo->min,rightInfo->min));
+        int currmax=max(root->data,max(leftInfo->max,rightInfo->max));
+        int currsize=leftInfo->size+rightInfo->size+1;
+        if(leftInfo->isBST && rightInfo->isBST
+        && leftInfo->max<root->data 
+        && rightInfo->min>root->data){
+            ans=max(ans,currsize);
+            return new info(true,currmax,currmin,currsize);
+        }
+        return new info(false,currmax,currmin,currsize);
+        
+    }
+    int largestBst(Node *root) {
+        // Your code here
+        ans=0;
+        helpher(root);
+        return (int)ans;
+    }
+};
