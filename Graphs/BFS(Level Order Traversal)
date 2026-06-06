@@ -1,0 +1,31 @@
+also known as the level order traversal
+uses queue fifo
+idea:- 
+takes the node asks for the neighbours then if they aren't visited then it will mark it as visited
+all the end we also mark the node as visited
+class Solution {
+  public:
+    vector<int> bfs(vector<vector<int>> &adj) {
+        // code here
+        int n=adj.size();
+        vector<int> bfs;
+        vector<int> visited(n,0);
+        queue<int> q;
+        q.push(0);
+        while(!q.empty()){
+            int node=q.front();
+            q.pop();
+            bfs.push_back(node);
+            for(auto it: adj[node]){
+                if(visited[it]==0){
+                    visited[it]=1;
+                    q.push(it);
+                }
+            }
+            visited[node]=1;
+            
+        }
+        return bfs;
+    }
+    
+};
