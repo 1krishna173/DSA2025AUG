@@ -1,0 +1,21 @@
+//idea: go in depth such that no new node can be found after that return it uses recursion
+class Solution {
+    void dfs1(vector<vector<int>>& adj,vector<int>& dfs,vector<int> &visited,int node){
+        visited[node]=1;
+        dfs.push_back(node);
+        for(auto it: adj[node]){
+            if(visited[it]==0){
+                dfs1(adj,dfs,visited,it);
+            }
+        }
+    }
+  public:
+    vector<int> dfs(vector<vector<int>>& adj) {
+        // Code here
+        int n=adj.size();
+        vector<int> dfs,vis(n,0);
+        dfs1(adj,dfs,vis,0);
+        return dfs;
+        
+    }
+};
