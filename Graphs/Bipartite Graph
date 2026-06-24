@@ -1,0 +1,38 @@
+class Solution {
+    // the idea is simple  that we have to color node such that no two adj. nodes are having same color
+public:
+    //since there can be multiple disconnected graphs we apply for all of them 
+    bool check(int start,vector<vector<int>>& graph,vector<int> &color){
+        queue<int> q;
+        color[start]=0;
+        q.push(start);
+        while(!q.empty()){
+            int node=q.front();
+            q.pop();
+            for(auto it: graph[node]){
+                // if it has not been visited yet
+                if(color[it]==-1){
+                    color[it]=!color[node];
+                    q.push(it);
+                }
+                // it has been visited and adjacent element has the same color
+                if(color[it]==color[node]){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    bool isBipartite(vector<vector<int>>& graph) {
+        int n=graph.size();
+        vector<int> color(n,-1);
+        for(int i=0;i<n;i++){
+            if(color[i]==-1){
+                bool k=check(i,graph,color);
+                if(k==false){return false;}
+            }
+        }
+        
+        return true;
+    }
+};
