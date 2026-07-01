@@ -1,0 +1,58 @@
+class Solution {
+  public:
+    vector<vector<string>> findSequences(vector<string> &words, string &s, string &e) {
+        // code here
+        vector<vector<string>> ans;
+        queue<vector<string>> q;
+        vector<string> onlevel;
+        unordered_set<string> st(words.begin(),words.end());
+        q.push({s});
+        int level=0;
+        
+        while(!q.empty()){
+            vector<string> vec=q.front();
+            q.pop();
+            // if the level has been traversed then we delete the elements in the list
+            if(vec.size()>level){
+                level++;
+                for(auto it: onlevel){
+                    if(st.count(it)){
+                        st.erase(it);
+                    }
+                }
+                onlevel.clear();
+            }
+            
+            
+            string curr=vec.back();
+            if(curr==e){
+                if(ans.size()==0){
+                    ans.push_back(vec);
+                }
+                else if(ans[0].size()==vec.size()){
+                    ans.push_back(vec);
+                }
+            }
+            
+            
+            for(int i=0;i<curr.size();i++){
+                char original=curr[i];
+                for(char c='a';c<='z';c++){
+                    curr[i]=c;
+                    if(st.count(curr)){
+                        vec.push_back(curr);
+                        q.push(vec);
+                        vec.pop_back();
+                        onlevel.push_back(curr);
+                    }
+                }
+                curr[i]=original;
+            }
+        }
+        
+        
+        
+        
+        return ans;
+    }
+};
