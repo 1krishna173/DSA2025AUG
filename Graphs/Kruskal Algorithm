@@ -1,0 +1,53 @@
+class Disjoint{
+    vector<int> size,parent;
+    public:
+    Disjoint(int n){
+        size.resize(n+1,1);
+        parent.resize(n+1);
+        for(int i=0;i<=n;i++){
+            parent[i]=i;
+        }
+    }
+    
+    int FindUltimmateParent(int u){
+        if(parent[u]==u)return u;
+        return parent[u]=FindUltimmateParent(parent[u]);
+    }
+    
+    void UnionBySize(int u,int v){
+        int up_u=FindUltimmateParent(u);
+        int up_v=FindUltimmateParent(v);
+        if(up_u==up_v)return;
+        if(size[up_u]<size[up_v]){
+            parent[up_u]=up_v;
+            size[up_v]+=size[up_u];
+        }
+        else{
+            parent[up_v]=up_u;
+            size[up_u]+=size[up_v];
+        }
+    }
+};
+class Solution {
+  public:
+    static bool comparator(const vector<int> &a,const vector<int> &b){
+       return a[2] < b[2]; 
+    }
+    int sum=0;
+    int kruskalsMST(int V, vector<vector<int>> &edges) {
+        // Sort all the edges based on the weights
+        sort(edges.begin(),edges.end(),comparator);
+        Disjoint ds(V);
+        for(auto it: edges){
+            int wt=it[2];
+            int node1=it[0];
+            int node2=it[1];
+            if(ds.FindUltimmateParent(node1)!=ds.FindUltimmateParent(node2)){
+                sum+=wt;
+                ds.UnionBySize(node1,node2);
+            }
+        }
+        return sum;
+        
+    }
+};
