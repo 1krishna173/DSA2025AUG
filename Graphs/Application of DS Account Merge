@@ -1,0 +1,65 @@
+class Disjoint{
+    vector<int> parent,size;
+    public:
+    Disjoint(int n){
+        parent.resize(n);
+        size.resize(n,1);
+        for(int i=0;i<n;i++)parent[i]=i;
+    }
+
+    int findUP(int u){
+        if(parent[u]==u)return u;
+        return parent[u]=findUP(parent[u]);
+    }
+
+    void Union(int u,int v){
+        int up_u=findUP(u);
+        int up_v=findUP(v);
+        if(up_u==up_v)return;
+        if(size[up_u]<size[up_v]){
+            parent[up_u]=up_v;
+            size[up_v]+=size[up_u];
+        }
+        else{
+            parent[up_v]=up_u;
+            size[up_u]+=size[up_v];
+        }
+    }
+};
+class Solution {
+public:
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+        unordered_map<string,int> mpp;
+        int n=accounts.size();
+        Disjoint ds(n);
+        for(int i=0;i<n;i++){
+            for(int j=1;j<accounts[i].size();j++){
+                string mail=accounts[i][j];
+                if(mpp.count(mail)){
+                    ds.Union(mpp[mail],i);
+                }
+                else mpp[mail]=i;
+            }
+        }
+
+        vector<vector<string>> mails(n);
+        for(auto it: mpp){
+            int up=ds.findUP(it.second);
+            string mail=it.first;
+            mails[up].push_back(mail);
+        }
+        vector<vector<string>> ans;
+
+        for(int i=0;i<n;i++){
+            if(mails[i].empty())continue;
+            sort(mails[i].begin(),mails[i].end());
+            vector<string> temp;             
+            temp.push_back(accounts[i][0]);
+            for(auto it: mails[i]){
+                temp.push_back(it);
+            }
+            ans.push_back(temp);
+        }
+        return ans;
+    }
+};
